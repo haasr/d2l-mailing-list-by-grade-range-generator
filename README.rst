@@ -46,4 +46,4 @@ Downloads
 
 `Windows 10 x86 64-bit <win10_x86_64_>`_
 
-.. _win10_x86_64: https://github.com/haasr/d2l-mailing-list-by-grade-range-generator/raw/main/downloads/MailingListByGradeRange_windows10_x86_64.exe]
+.. _win10_x86_64: https://github.com/haasr/d2l-mailing-list-by-grade-range-generator/raw/main/downloads/MailingListByGradeRange_windows10_x86_64.exe
