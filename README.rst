@@ -17,8 +17,8 @@ CSV File Format
 Although this tool was designed for instructors who use the Brightspace D2L LMS, it will really work
 with any CSV file that contains two columns:
 
-1. One column named `Email`
-2. One column named `Calculated Final Grade Scheme Symbol`
+1. One column named ``Email``
+2. One column named ``Calculated Final Grade Scheme Symbol``
 
 The first column must contain student email addresses and the second column must contain the respective
 grade for each student email address. The grades can be written in whole number or decimal form and may
