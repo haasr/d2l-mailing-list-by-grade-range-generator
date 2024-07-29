@@ -6,7 +6,7 @@ D2L Mailing List by Grade Range Generator
     :alt: Application preview
     :scale: 75%
 
-Quickly generate a mailing list from a of students in a certain grade range from a D2L grades export.
+Quickly generate a mailing list of students in a certain grade range from a D2L grades export.
 I designed this tool so I can quickly build a mailing list of my students failing or near failing so that
 I can send email them to let them know where they stand and offer support.
 
