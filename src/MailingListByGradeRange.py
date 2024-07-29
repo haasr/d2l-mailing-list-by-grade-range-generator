@@ -6,13 +6,21 @@ import pandas as pd
 import webbrowser
 
 
+try:
+    from ctypes import windll
+    windll.shcore.SetProcessDpiAwareness(1)
+except:
+    pass
+
+
 greater_than_percentage = -1
 less_than_percentage = 60
 file_path = None
 
 range_presets = [
-    'Failing (< 60)',
-    'Near failing (60-66.999)',
+    'Failing CSCI (< 60)',
+    'Failing (< 65)',
+    'Near failing CSCI (60-66.999)',
     'C- and below (< 73)',
     'A-B range (80-100)',
     'D- (60-62.999)',
@@ -28,8 +36,9 @@ range_presets = [
 ]
 
 range_presets_dict = {
-    'Failing (< 60)': (-1, 60),
-    'Near failing (60-66.999)': (59.999, 67),
+    'Failing CSCI (< 60)': (-1, 60),
+    'Failing (< 65)': (-1, 65),
+    'Near failing CSCI (60-66.999)': (59.999, 67),
     'C- and below (< 73)': (-1, 73),
     'A-B range (80-100)': (79.999, 101),
     'D- (60-62.999)': (59.999, 63),
@@ -85,6 +94,7 @@ def check_percentages():
 
 def calc_results():
     global file_path
+    check_percentages()
     def _calc():
         df = pd.read_csv(file_path)
         df['Overall Grade'] = df['Calculated Final Grade Scheme Symbol'].str.replace(' %', '')
@@ -136,9 +146,14 @@ def reset():
 # Create the main Tkinter window
 root = tk.Tk()
 root.configure(background='#F9F9FA')
-#root.option_add('*Font', 'Roboto 12')
-root.option_add('*Label.Font', 'Roboto 12')
-root.option_add('*Button.Font', 'Roboto 12')
+root.default_font = 'Roboto'
+root.default_fontsize = '13'
+
+font_defaults = f"{root.default_font} {root.default_fontsize}"
+root.option_add('*Font', font_defaults)
+root.option_add('*Label.Font', font_defaults)
+root.option_add('*Button.Font', font_defaults)
+
 root.title("Generate Student Mailing List by Grade Range")
 
 
@@ -154,19 +169,19 @@ preset.set(range_presets[0])
 preset_opt = OptionMenu(root, preset, *range_presets, command=apply_preset)
 preset_opt.grid(row=0, column=2, padx=(0, 12))
 
-greater_than_label = Label(root, text='Greater than percentage', background='#F9F9FA').grid(row=1, padx=(24,0))
+greater_than_label = Label(root, text='Greater than percentage', background='#F9F9FA').grid(row=1, padx=(19,0))
 greater_than_entry = Entry(root)
 greater_than_entry.grid(row=1, column=1)
 greater_than_entry.insert(0, greater_than_percentage)
 
-calc_button = Button(root, text='⚡ Calculate', command=calc_results, background='#fcba5b', width=10)
+calc_button = Button(root, text='⚡ Calculate', command=calc_results, background='#fcba5b', width=12)
 calc_button.grid(row=1, column=2, padx=(0, 12))
 
 less_than_label = Label(root, text='Less than percentage', background='#F9F9FA').grid(row=2)
 less_than_entry = Entry(root)
 less_than_entry.grid(row=2, column=1, pady=5)
 less_than_entry.insert(0, less_than_percentage)
-reset_button = Button(root, text='⟳ Reset', command=reset, background='#ff8073', width=10)
+reset_button = Button(root, text='⟳ Reset', command=reset, background='#ff8073', width=12)
 reset_button.grid(row=2, column=2, padx=(0, 12))
 
 mailing_list_label = Label(root, text='Resulting mailing list:', background='#F9F9FA').grid(row=3, pady=5)
